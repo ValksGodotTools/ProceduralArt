@@ -5,7 +5,7 @@ Attempt to make art through script.
 1. Download and install the [latest Godot 4 C# release](https://godotengine.org/)
 2. Clone this repository with all its submodules
 ```
-git clone --recursive https://github.com/ValksGodotTools/Template
+git clone --recursive https://github.com/ValksGodotTools/ProceduralArt
 ```
 
 ## Contributing
