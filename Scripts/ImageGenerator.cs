@@ -12,12 +12,12 @@ public partial class ImageGenerator : Node
     {
         var textureRect = GetNode<TextureRect>("TextureRect");
 
-        var imageSize = new Vector2I(100, 100);
+        var imageSize = new Vector2I(125, 125);
 
         image = Image.Create(imageSize.X, imageSize.Y, true, Image.Format.Rgba8);
         image.Fill(Colors.Transparent);
 
-        start = new Vector2I(imageSize.X / 2, imageSize.Y - 1);
+        start = new Vector2I(0, imageSize.Y - 1);
 
         GenerateTree();
 
@@ -32,12 +32,19 @@ public partial class ImageGenerator : Node
 
     private void Trunk()
     {
-        for (int x = 0; x < 5; x++)
+        var points = GetNode<Path2D>("Path2D").Curve.GetBakedPoints();
+
+        for (int i = 0; i < points.Length - 1; i++)
         {
-            for (int y = 0; y < 40; y++)
+            var pointA = points[i];
+            var pointB = points[i + 1];
+
+            for (int a = 0; a < pointA.DistanceTo(pointB); a++)
             {
-                SetPixel(x, y, darkBrown);
+                // ?
             }
+
+            SetPixel((int)pointA.X, (int)pointA.Y, darkBrown);
         }
     }
 
