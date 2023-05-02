@@ -32,19 +32,19 @@ public partial class ImageGenerator : Node
 
     private void Trunk()
     {
-        var points = GetNode<Path2D>("Path2D").Curve.GetBakedPoints();
+        var curve = GetNode<Path2D>("Path2D").Curve;
+        curve.BakeInterval = 1;
+        var points = curve.GetBakedPoints();
 
         for (int i = 0; i < points.Length - 1; i++)
         {
-            var pointA = points[i];
-            var pointB = points[i + 1];
+            var point = points[i];
 
-            for (int a = 0; a < pointA.DistanceTo(pointB); a++)
-            {
-                // ?
-            }
+            for (int w = 0; w < 2; w++)
+                SetPixel(point.X + w, point.Y, Utils.Color(75, 65, 49));
 
-            SetPixel((int)pointA.X, (int)pointA.Y, darkBrown);
+            for (int w = 2; w < 10; w++)
+                SetPixel(point.X + w, point.Y, Utils.Color(55, 48, 36));
         }
     }
 
@@ -53,6 +53,6 @@ public partial class ImageGenerator : Node
         
     }
 
-    private void SetPixel(int x, int y, Color color) =>
-        image.SetPixel(start.X + x, start.Y - y, color);
+    private void SetPixel(float x, float y, Color color) =>
+        image.SetPixel(start.X + (int)x, start.Y - (int)y, color);
 }
